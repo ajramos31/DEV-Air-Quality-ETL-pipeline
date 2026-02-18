@@ -1,0 +1,384 @@
+table fact_daily_air_quality
+	lineageTag: df5bff22-0384-4bd9-bd7a-97449773c7b3
+	sourceLineageTag: [dbo].[fact_daily_air_quality]
+
+	measure 'Unhealthy Day Count' = ```
+			
+			        COUNTROWS(
+			            FILTER(
+			                fact_daily_air_quality,
+			                fact_daily_air_quality[aqi] > 100
+			            )
+			        )
+			```
+		formatString: 0
+		lineageTag: 3bf244fb-d0c1-4c04-ad1b-41f131362092
+
+	measure 'Worst State for Unhealthy AQI' = ```
+			
+			        VAR StateUnhealthyCounts =
+			            CALCULATETABLE(
+			                ADDCOLUMNS(
+			                    ALL( dim_location[state_name] ),
+			                    "@UnhealthyCount",
+			                        CALCULATE(
+			                            COUNTROWS( fact_daily_air_quality ),
+			                            fact_daily_air_quality[aqi] > 150
+			                        )
+			                ),
+			                REMOVEFILTERS( dim_location ),
+			                REMOVEFILTERS( dim_parameter )
+			            )
+			        VAR MaxCount =
+			            MAXX( StateUnhealthyCounts, [@UnhealthyCount] )
+			        VAR WorstState =
+			            TOPN(
+			                1,
+			                FILTER( StateUnhealthyCounts, [@UnhealthyCount] = MaxCount ),
+			                [@UnhealthyCount], DESC,
+			                dim_location[state_name], ASC
+			            )
+			        RETURN
+			            CONCATENATEX(
+			                WorstState,
+			                dim_location[state_name],
+			                ", "
+			            )
+			```
+		isHidden
+		lineageTag: e07c4b37-656d-4ff3-8d5e-0cc3be5d5f35
+
+		changedProperty = IsHidden
+
+	measure 'Leading Pollutant by Avg AQI' = ```
+			
+			        VAR PollutantAvgAQI =
+			            CALCULATETABLE(
+			                ADDCOLUMNS(
+			                    ALL( dim_parameter[parameter_name] ),
+			                    "@AvgAQI",
+			                        CALCULATE(
+			                            AVERAGE( fact_daily_air_quality[aqi] )
+			                        )
+			                ),
+			                REMOVEFILTERS( dim_location ),
+			                REMOVEFILTERS( dim_parameter )
+			            )
+			        VAR MaxAvg =
+			            MAXX( PollutantAvgAQI, [@AvgAQI] )
+			        VAR TopPollutant =
+			            TOPN(
+			                1,
+			                FILTER( PollutantAvgAQI, [@AvgAQI] = MaxAvg ),
+			                [@AvgAQI], DESC
+			            )
+			        RETURN
+			            CONCATENATEX(
+			                TopPollutant,
+			                dim_parameter[parameter_name] & UNICHAR(10) & FORMAT( [@AvgAQI], "0.00" ),
+			                ", "
+			            )
+			```
+		lineageTag: cc920546-b5de-4326-9325-7f4af3a3fb8c
+
+	measure AVG_AQI = ```
+			AVERAGE(fact_daily_air_quality[aqi]) 
+			```
+		lineageTag: ce4e7a30-fe09-437b-b8a0-4cc8d5e7af6e
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AVG AQI PY' = CALCULATE([AVG_AQI], SAMEPERIODLASTYEAR(dim_date[date]))
+		lineageTag: afaceb01-b214-406a-8811-cbceaf405583
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AVG YoY Perc' = ```
+			DIVIDE([AVG_AQI] - [AVG AQI PY], [AVG AQI PY]) 
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: e15d9006-894b-48f1-9057-5c821e966a46
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	measure 'AQI target' = 0
+		formatString: 0
+		lineageTag: 772d2b89-1e14-43b3-8aec-04f8bd5d3531
+
+		changedProperty = Name
+
+	measure 'Avg AQI' = ```
+			
+			        CALCULATE(
+			            AVERAGE( fact_daily_air_quality[aqi] ),
+			            REMOVEFILTERS( dim_location ),
+			            REMOVEFILTERS( dim_parameter )
+			        )
+			```
+		lineageTag: bca823ef-228e-4e6e-9d28-4fb9fc55e425
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AQI MoM Perc' = ```
+			
+			VAR CurrentValue =
+			    [Avg AQI]
+			
+			VAR PreviousMonthValue =
+			    CALCULATE(
+			        [Avg AQI],
+			        DATEADD(dim_date[date], -1, MONTH)
+			    )
+			
+			RETURN
+			    DIVIDE(CurrentValue - PreviousMonthValue, PreviousMonthValue)
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: b2ba38ea-2121-4dc2-a728-2eb104d0cc61
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	measure 'AQI MoM % (Monthly)' = ```
+			
+			VAR CurrentMonthValue =
+			    CALCULATE(
+			        [Avg AQI],
+			        REMOVEFILTERS(dim_date[date])
+			    )
+			
+			VAR PreviousMonthValue =
+			    CALCULATE(
+			        [Avg AQI],
+			        DATEADD(dim_date[date], -1, MONTH),
+			        REMOVEFILTERS(dim_date[date])
+			    )
+			
+			RETURN
+			    DIVIDE(CurrentMonthValue - PreviousMonthValue, PreviousMonthValue)
+			
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: dfdcc7b9-7974-4126-b654-57e8aedefb24
+
+		changedProperty = Name
+
+		changedProperty = FormatString
+
+	measure 'YOY AQI Change %' =
+			
+			VAR CurrentYear = SELECTEDVALUE( dim_date[year] )
+			VAR CurrentYearAvg =
+			    CALCULATE(
+			        AVERAGE( fact_daily_air_quality[aqi] ),
+			        FILTER( ALL( dim_date ), dim_date[year] = CurrentYear ),
+			        REMOVEFILTERS( dim_location ),
+			        REMOVEFILTERS( dim_parameter )
+			    )
+			VAR PriorYearAvg =
+			    CALCULATE(
+			        AVERAGE( fact_daily_air_quality[aqi] ),
+			        FILTER( ALL( dim_date ), dim_date[year] = CurrentYear - 1 ),
+			        REMOVEFILTERS( dim_location ),
+			        REMOVEFILTERS( dim_parameter )
+			    )
+			RETURN
+			    IF(
+			        ISBLANK( PriorYearAvg ) || PriorYearAvg = 0,
+			        0,
+			        DIVIDE( CurrentYearAvg - PriorYearAvg, PriorYearAvg ) * 100
+			    )
+		lineageTag: b01776bf-ca28-4cf5-a509-65cb35f261b2
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'MoM AQI Change %' = ```
+			
+			VAR CurrentYear = SELECTEDVALUE(dim_date[year])
+			VAR CurrentMonth = SELECTEDVALUE(dim_date[month])
+			
+			VAR CurrentMonthAvg =
+			    CALCULATE(
+			        AVERAGE(fact_daily_air_quality[aqi])
+			    )
+			
+			VAR PriorMonthAvg =
+			    CALCULATE(
+			        AVERAGE(fact_daily_air_quality[aqi]),
+			        DATEADD(dim_date[date], -1, MONTH)
+			    )
+			
+			RETURN
+			    IF(
+			        ISBLANK(PriorMonthAvg) || PriorMonthAvg = 0,
+			        BLANK(),
+			        DIVIDE(CurrentMonthAvg - PriorMonthAvg, PriorMonthAvg)
+			    )
+			
+			```
+		lineageTag: 9d2f0ef0-82d5-4128-b69b-d70841ea8975
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Test Avg AQI' = ```
+			[Avg AQI]
+			
+			```
+		lineageTag: 2e580450-b005-42a8-a7d7-02617d90f553
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 9c07a5db-d7c4-4f64-b8aa-d57360700ae2
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 1d248408-f74d-467f-b660-6c436facd52d
+		sourceLineageTag: location_key
+		summarizeBy: none
+		sourceColumn: location_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column parameter_key
+		dataType: int64
+		formatString: 0
+		lineageTag: fd8665d2-90ee-45f4-98b4-3b8dd0d3f068
+		sourceLineageTag: parameter_key
+		summarizeBy: none
+		sourceColumn: parameter_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column poc
+		dataType: int64
+		formatString: 0
+		lineageTag: cf2cbd41-ed02-4633-b70a-79f79d0f41a1
+		sourceLineageTag: poc
+		summarizeBy: sum
+		sourceColumn: poc
+
+		annotation SummarizationSetBy = Automatic
+
+	column method_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 4142ed2e-67d9-40ac-9f1d-d9e8a02e78eb
+		sourceLineageTag: method_key
+		summarizeBy: none
+		sourceColumn: method_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column arithmetic_mean
+		dataType: double
+		lineageTag: 27a0290a-48d6-4e8d-bf2d-9f408dc0d93d
+		sourceLineageTag: arithmetic_mean
+		summarizeBy: sum
+		sourceColumn: arithmetic_mean
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column first_max_value
+		dataType: double
+		lineageTag: 43c2cd71-ba0b-41b8-9682-3690402fbabe
+		sourceLineageTag: first_max_value
+		summarizeBy: sum
+		sourceColumn: first_max_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column first_max_hour
+		dataType: int64
+		formatString: 0
+		lineageTag: 44cc64e6-301d-480e-89f8-84b4800ac39c
+		sourceLineageTag: first_max_hour
+		summarizeBy: sum
+		sourceColumn: first_max_hour
+
+		annotation SummarizationSetBy = Automatic
+
+	column aqi
+		dataType: int64
+		formatString: 0
+		lineageTag: 57c50508-6fd6-4819-a10a-33715e13c8f7
+		sourceLineageTag: aqi
+		summarizeBy: sum
+		sourceColumn: aqi
+
+		annotation SummarizationSetBy = Automatic
+
+	column observation_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 837ef390-9338-419d-adfc-156098e01f42
+		sourceLineageTag: observation_count
+		summarizeBy: sum
+		sourceColumn: observation_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column observation_percent
+		dataType: double
+		lineageTag: dedbd848-a039-46a5-a996-5963a979ed20
+		sourceLineageTag: observation_percent
+		summarizeBy: sum
+		sourceColumn: observation_percent
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column aqi_category
+		dataType: string
+		lineageTag: 4435838e-6079-41a4-9334-bc47ef567d23
+		sourceLineageTag: aqi_category
+		summarizeBy: none
+		sourceColumn: aqi_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column exceeds_standard
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 7cfb2f63-5df0-4bdd-93bf-7ef771f524df
+		sourceLineageTag: exceeds_standard
+		summarizeBy: none
+		sourceColumn: exceeds_standard
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_daily_air_quality = entity
+		mode: directLake
+		source
+			entityName: fact_daily_air_quality
+			schemaName: dbo
+			expressionSource: 'DirectLake - team2_WH'
+

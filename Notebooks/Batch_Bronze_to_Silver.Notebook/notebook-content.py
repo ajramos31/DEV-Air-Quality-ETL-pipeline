@@ -27,7 +27,6 @@
 # CELL ********************
 
 from pyspark.sql import functions as F
-from delta.tables import DeltaTable
 
 
 # METADATA ********************
@@ -42,40 +41,7 @@ from delta.tables import DeltaTable
 # Read in bronze date
 BRONZE_PATH = "Files/RAW/aqs_dailyByState"
 
-bronze = spark.read.parquet(BRONZE_PATH).limit(1000)
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
-
-bronze.printSchema()
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
-
-display(bronze)
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# CELL ********************
-
-bronze.select("pollutant_standard").distinct().show(truncate=False)
+bronze = spark.read.parquet(BRONZE_PATH)
 
 # METADATA ********************
 
@@ -99,7 +65,8 @@ silver_base = (
     bronze.withColumn("pollutant_standard", F.trim(F.col("pollutant_standard")))
     .filter(F.col("pollutant_standard").isin(standard_filter))
     .drop("pollutant_standard")
-    .filter((F.col("validity_indicator") == "Y"))
+    .filter((F.col("validity_indicator") == "Y") &
+     (F.col("arithmetic_mean").isNotNull()) & (F.col("aqi").isNotNull()))
     .withColumn("aqi", F.col("aqi").cast("int"))
     .withColumn("first_max_hour", F.col("first_max_hour").cast("int"))
     .withColumn("observation_count", F.col("observation_count").cast("int"))
@@ -133,16 +100,16 @@ display(silver_base)
 
 # CELL ********************
 
+# Measurement Table
 pk_cols = ["state_code","county_code","site_number","parameter_code","poc","date_local"]
-sliver_daily =(
+silver_daily =(
     silver_base
     .select(
         *pk_cols,
         "method_code","arithmetic_mean","first_max_value","first_max_hour","aqi",
         "observation_count","observation_percent","validity_indicator",
-        F.col("units_of_measure").alias("unit_of_measurement"),
-        "sample_duration","event_type","date_of_last_change","ingestion_run_id",
-        "ingestion_ts_utc","source_endpoint"
+        F.col("units_of_measure"),
+        "sample_duration","event_type","date_of_last_change","year","month"
     ).dropDuplicates(pk_cols)
 )
 
@@ -158,7 +125,7 @@ sliver_daily =(
 # Smaller table
 silver_cbsa = (
     silver_base
-    .select("cbsa_code", "cbsa_name")
+    .select(F.col("cbsa_code").cast("int"), "cbsa")
     .where(F.col("cbsa_code").isNotNull())
     .dropDuplicates(["cbsa_code"])
 )
@@ -166,7 +133,7 @@ silver_cbsa = (
 silver_admin_area = (
     silver_base
     .select(
-        "state_code","county_code","state_name","county_name"
+        "state_code","county_code","state","county"
     )
     .dropDuplicates(["state_code", "county_code"])
 )
@@ -184,22 +151,53 @@ silver_site = (
 silver_parameter = (
     silver_base
     .select(
-        "parameter_code", F.col("parameter_name")
+        "parameter_code",
+        F.col("parameter").cast("string")
     )
+    .where(F.col("parameter_code").isNotNull())
     .dropDuplicates(["parameter_code"])
 )
+
 
 silver_method = (
     silver_base
     .select(
         "method_code",
-        F.col("method_name")
+        F.col("method")
     )
     .where(F.col("method_code").isNotNull())
     .dropDuplicates(["method_code"])
 )
 
 
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# MARKDOWN ********************
+
+# ## Writing to Silver as Delta Tables
+
+# CELL ********************
+
+'''
+silver_cbsa.write.format("delta").mode("overwrite").saveAsTable("silver_cbsa")
+silver_admin_area.write.format("delta").mode("overwrite").saveAsTable("silver_admin_area")
+silver_site.write.format("delta").mode("overwrite").saveAsTable("silver_site")
+silver_method.write.format("delta").mode("overwrite").saveAsTable("silver_method")
+
+# Measurement table 
+(silver_daily
+        .write.format("delta")
+        .mode("overwrite")
+        .saveAsTable("silver_daily_measurement")
+    )
+'''
+silver_parameter.write.format("delta").mode("overwrite").saveAsTable("silver_parameter")
 
 # METADATA ********************
 

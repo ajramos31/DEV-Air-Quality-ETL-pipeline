@@ -1,0 +1,374 @@
+{
+  "properties": {
+    "jobMode": "Batch",
+    "source": {
+      "type": "LakehouseTable",
+      "connectionSettings": {
+        "type": "Lakehouse",
+        "typeProperties": {
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "artifactId": "87cfd2a4-9431-9d67-486b-fecc87c0302d",
+          "rootFolder": "Tables"
+        }
+      }
+    },
+    "destination": {
+      "type": "DataWarehouseTable",
+      "connectionSettings": {
+        "type": "DataWarehouse",
+        "typeProperties": {
+          "workspaceId": "246d8a46-54fb-4891-b6c6-a0f96a6a126f",
+          "artifactId": "8abb56af-3e98-4d1f-af3b-d5629ab273fb",
+          "endPoint": "ljtep6k45cvuhamyfogizpvwim-i2fg2jh3ksiurnwgud4wu2qsn4.datawarehouse.fabric.microsoft.com"
+        }
+      }
+    },
+    "policy": {
+      "timeout": "0.12:00:00"
+    }
+  },
+  "activities": [
+    {
+      "id": "a5b098a5-9346-4b99-95b8-f3089b131860",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "dbo",
+            "table": "dim_date"
+          }
+        },
+        "destination": {
+          "datasetSettings": {
+            "schema": "dbo",
+            "table": "dim_date"
+          }
+        },
+        "enableStaging": true,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    },
+    {
+      "id": "f465d380-0c03-4c5c-b760-37dc4505e6c0",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "dbo",
+            "table": "dim_location"
+          }
+        },
+        "destination": {
+          "datasetSettings": {
+            "schema": "dbo",
+            "table": "dim_location"
+          }
+        },
+        "enableStaging": true,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    },
+    {
+      "id": "a57ff7dd-ac88-4e12-8a97-09a054d6f984",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "dbo",
+            "table": "dim_method"
+          }
+        },
+        "destination": {
+          "datasetSettings": {
+            "schema": "dbo",
+            "table": "dim_method"
+          }
+        },
+        "enableStaging": true,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    },
+    {
+      "id": "eb856481-2889-4c38-add2-74a52bec0970",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "dbo",
+            "table": "dim_parameter"
+          }
+        },
+        "destination": {
+          "datasetSettings": {
+            "schema": "dbo",
+            "table": "dim_parameter"
+          }
+        },
+        "enableStaging": true,
+        "translator": {
+          "type": "TabularTranslator",
+          "mappings": [
+            {
+              "source": {
+                "name": "parameter_key",
+                "type": "Int32",
+                "physicalType": "integer"
+              },
+              "destination": {
+                "name": "parameter_key",
+                "physicalType": "int"
+              }
+            },
+            {
+              "source": {
+                "name": "parameter_code",
+                "type": "String",
+                "physicalType": "string"
+              },
+              "destination": {
+                "name": "parameter_code",
+                "physicalType": "varchar",
+                "length": "255"
+              }
+            },
+            {
+              "source": {
+                "name": "parameter_name",
+                "type": "String",
+                "physicalType": "string"
+              },
+              "destination": {
+                "name": "parameter_name",
+                "physicalType": "varchar",
+                "length": "255"
+              }
+            },
+            {
+              "source": {
+                "name": "unit_of_measurement",
+                "type": "String",
+                "physicalType": "string"
+              },
+              "destination": {
+                "name": "unit_of_measurement",
+                "physicalType": "varchar",
+                "length": "255"
+              }
+            },
+            {
+              "source": {
+                "name": "category",
+                "type": "String",
+                "physicalType": "string"
+              },
+              "destination": {
+                "name": "category",
+                "physicalType": "varchar",
+                "length": "255"
+              }
+            }
+          ]
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    },
+    {
+      "id": "1f1435d1-c78b-48c0-b9f7-58f4ad41f447",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "schema": "dbo",
+            "table": "fact_daily_air_quality"
+          }
+        },
+        "destination": {
+          "datasetSettings": {
+            "schema": "dbo",
+            "table": "fact_daily_air_quality"
+          }
+        },
+        "enableStaging": true,
+        "translator": {
+          "type": "TabularTranslator",
+          "mappings": [
+            {
+              "source": {
+                "name": "date_key",
+                "type": "Int32",
+                "physicalType": "integer"
+              },
+              "destination": {
+                "name": "date_key",
+                "physicalType": "bigint"
+              }
+            },
+            {
+              "source": {
+                "name": "location_key",
+                "type": "Int32",
+                "physicalType": "integer"
+              },
+              "destination": {
+                "name": "location_key",
+                "physicalType": "bigint"
+              }
+            },
+            {
+              "source": {
+                "name": "parameter_key",
+                "type": "Int32",
+                "physicalType": "integer"
+              },
+              "destination": {
+                "name": "parameter_key",
+                "physicalType": "bigint"
+              }
+            },
+            {
+              "source": {
+                "name": "poc",
+                "type": "Int32",
+                "physicalType": "integer"
+              },
+              "destination": {
+                "name": "poc",
+                "physicalType": "bigint"
+              }
+            },
+            {
+              "source": {
+                "name": "method_key",
+                "type": "Int32",
+                "physicalType": "integer"
+              },
+              "destination": {
+                "name": "method_key",
+                "physicalType": "bigint"
+              }
+            },
+            {
+              "source": {
+                "name": "arithmetic_mean",
+                "type": "Double",
+                "physicalType": "double"
+              },
+              "destination": {
+                "name": "arithmetic_mean",
+                "physicalType": "float"
+              }
+            },
+            {
+              "source": {
+                "name": "first_max_value",
+                "type": "Double",
+                "physicalType": "double"
+              },
+              "destination": {
+                "name": "first_max_value",
+                "physicalType": "float"
+              }
+            },
+            {
+              "source": {
+                "name": "first_max_hour",
+                "type": "Int32",
+                "physicalType": "integer"
+              },
+              "destination": {
+                "name": "first_max_hour",
+                "physicalType": "bigint"
+              }
+            },
+            {
+              "source": {
+                "name": "aqi",
+                "type": "Int32",
+                "physicalType": "integer"
+              },
+              "destination": {
+                "name": "aqi",
+                "physicalType": "bigint"
+              }
+            },
+            {
+              "source": {
+                "name": "observation_count",
+                "type": "Int32",
+                "physicalType": "integer"
+              },
+              "destination": {
+                "name": "observation_count",
+                "physicalType": "bigint"
+              }
+            },
+            {
+              "source": {
+                "name": "observation_percent",
+                "type": "Double",
+                "physicalType": "double"
+              },
+              "destination": {
+                "name": "observation_percent",
+                "physicalType": "float"
+              }
+            },
+            {
+              "source": {
+                "name": "aqi_category",
+                "type": "String",
+                "physicalType": "string"
+              },
+              "destination": {
+                "name": "aqi_category",
+                "physicalType": "varchar",
+                "length": "8000"
+              }
+            },
+            {
+              "source": {
+                "name": "exceeds_standard",
+                "type": "Boolean",
+                "physicalType": "boolean"
+              },
+              "destination": {
+                "name": "exceeds_standard",
+                "physicalType": "bit"
+              }
+            }
+          ]
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    }
+  ]
+}

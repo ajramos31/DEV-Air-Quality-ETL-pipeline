@@ -1,0 +1,27 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "Population Dataflow",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "DefaultDestination": {
+      "queryId": "6321402e-c11b-4438-ad10-3f1542230e9d",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "NA-EST2025-POP_unpivoted csv": {
+      "queryId": "fcfde92b-627a-426d-b95e-bc15dce1b466",
+      "queryName": "NA-EST2025-POP_unpivoted csv",
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"3b44e3fd-fd01-4fb9-8bbd-2e7c08f92753\",\"DatasourceId\":\"83e17f03-24fe-46a4-9b9c-1ea712a4c9ad\"}"
+    }
+  ]
+}

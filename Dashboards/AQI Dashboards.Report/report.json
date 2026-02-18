@@ -1,0 +1,215 @@
+{
+  "config": "{\"version\":\"5.70\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY26SU02\",\"type\":2,\"version\":{\"visual\":\"2.6.0\",\"report\":\"3.1.0\",\"page\":\"2.3.0\"}}},\"activeSectionIndex\":1,\"defaultDrillFilterOtherVisuals\":true,\"linguisticSchemaSyncVersion\":0,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"useEnhancedTooltips\":true,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "pods": [
+    {
+      "boundSection": "4254fceaa309d3508680",
+      "config": "{\"acceptsFilterContext\":1}",
+      "name": "ecf31b00580cec02ff36",
+      "parameters": "[{\"name\":\"d28125e596d88819afa2\",\"boundFilter\":\"32d5b27e1c0f6526b3f2\",\"fieldExpr\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_location\"}},\"Property\":\"population\"}}}]"
+    }
+  ],
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY26SU02",
+            "path": "BaseThemes/CY26SU02.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{}",
+      "displayName": "Page 1",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "371cb8f7fce7c9fe1fd8",
+      "ordinal": 1,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"0f6185b7ff1dbf9c1919\",\"layouts\":[{\"id\":0,\"position\":{\"x\":547.7254202381471,\"y\":184.15930615382385,\"z\":7000,\"width\":273.268647841158,\"height\":110.4955836922943,\"tabOrder\":7000}}],\"singleVisual\":{\"visualType\":\"kpi\",\"projections\":{\"TrendLine\":[{\"queryRef\":\"dim_date.date\"}],\"Goal\":[{\"queryRef\":\"fact_daily_air_quality.AQI target\"}],\"Indicator\":[{\"queryRef\":\"fact_daily_air_quality.MoM AQI Change %\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"fact_daily_air_quality\",\"Type\":0},{\"Name\":\"d\",\"Entity\":\"dim_date\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"date\"},\"Name\":\"dim_date.date\",\"NativeReferenceName\":\"date\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"AQI target\"},\"Name\":\"fact_daily_air_quality.AQI target\",\"NativeReferenceName\":\"AQI target\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"MoM AQI Change %\"},\"Name\":\"fact_daily_air_quality.MoM AQI Change %\",\"NativeReferenceName\":\"MoM AQI Change %\"}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"lastDate\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"goals\":[{\"properties\":{\"showGoal\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[{\"name\":\"f209e864f21d319ebd3b\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_date\"}},\"Property\":\"date\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_date\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"date\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"datetime'2025-11-28T00:00:00'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{},\"isHiddenInViewMode\":false},{\"name\":\"0b139e41ae8faa3f260b\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_parameter\"}},\"Property\":\"parameter_name\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_parameter\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"parameter_name\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'PM2.5'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{\"general\":[{\"properties\":{}}]}}]",
+          "height": 110.50,
+          "width": 273.27,
+          "x": 547.73,
+          "y": 184.16,
+          "z": 7000.00
+        },
+        {
+          "config": "{\"name\":\"129f1c4bff68da41c1bf\",\"layouts\":[{\"id\":0,\"position\":{\"x\":820.9940680793051,\"y\":184.15930615382385,\"z\":8000,\"width\":273.268647841158,\"height\":110.4955836922943,\"tabOrder\":8000}}],\"singleVisual\":{\"visualType\":\"kpi\",\"projections\":{\"TrendLine\":[{\"queryRef\":\"dim_date.date\"}],\"Goal\":[{\"queryRef\":\"fact_daily_air_quality.AQI target\"}],\"Indicator\":[{\"queryRef\":\"fact_daily_air_quality.MoM AQI Change %\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"fact_daily_air_quality\",\"Type\":0},{\"Name\":\"d\",\"Entity\":\"dim_date\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"date\"},\"Name\":\"dim_date.date\",\"NativeReferenceName\":\"date\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"AQI target\"},\"Name\":\"fact_daily_air_quality.AQI target\",\"NativeReferenceName\":\"AQI target\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"MoM AQI Change %\"},\"Name\":\"fact_daily_air_quality.MoM AQI Change %\",\"NativeReferenceName\":\"MoM AQI Change %\"}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"lastDate\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"goals\":[{\"properties\":{\"showGoal\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[{\"name\":\"f209e864f21d319ebd3b\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_date\"}},\"Property\":\"date\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_date\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"date\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"datetime'2025-11-28T00:00:00'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{},\"isHiddenInViewMode\":false},{\"name\":\"0b139e41ae8faa3f260b\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_parameter\"}},\"Property\":\"parameter_name\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_parameter\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"parameter_name\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'SO2'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{\"general\":[{\"properties\":{}}]}}]",
+          "height": 110.50,
+          "width": 273.27,
+          "x": 820.99,
+          "y": 184.16,
+          "z": 8000.00
+        },
+        {
+          "config": "{\"name\":\"38f49b75b02516b961ab\",\"layouts\":[{\"id\":0,\"position\":{\"x\":311.4359920201754,\"y\":359.74454523782634,\"z\":0,\"width\":646.5123398702651,\"height\":359.74454523782634,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"lineChart\",\"projections\":{\"Category\":[{\"queryRef\":\"dim_date.year\",\"active\":true},{\"queryRef\":\"dim_date.month_name\",\"active\":true}],\"Y\":[{\"queryRef\":\"Sum(fact_daily_air_quality.aqi)\"}],\"Series\":[{\"queryRef\":\"dim_parameter.parameter_name\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_date\",\"Type\":0},{\"Name\":\"f\",\"Entity\":\"fact_daily_air_quality\",\"Type\":0},{\"Name\":\"d1\",\"Entity\":\"dim_parameter\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"aqi\"}},\"Function\":1},\"Name\":\"Sum(fact_daily_air_quality.aqi)\",\"NativeReferenceName\":\"Average of aqi\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d1\"}},\"Property\":\"parameter_name\"},\"Name\":\"dim_parameter.parameter_name\",\"NativeReferenceName\":\"parameter_name\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"year\"},\"Name\":\"dim_date.year\",\"NativeReferenceName\":\"year\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"month_name\"},\"Name\":\"dim_date.month_name\",\"NativeReferenceName\":\"month_name\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"aqi\"}},\"Function\":1}}}]},\"drillFilterOtherVisuals\":true,\"filterSortOrder\":3,\"objects\":{}}}",
+          "filters": "[{\"name\":\"0401327f0ecab95a0e89\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_date\"}},\"Property\":\"month\"}},\"type\":\"Advanced\",\"howCreated\":1,\"isHiddenInViewMode\":false,\"ordinal\":2}]",
+          "height": 359.74,
+          "width": 646.51,
+          "x": 311.44,
+          "y": 359.74,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"5711dc1de0b433751ef3\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":441.97186986361527,\"z\":1000,\"width\":300.12973488412945,\"height\":150.06486744206472,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"dim_location.state_name\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_location\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"state_name\"},\"Name\":\"dim_location.state_name\",\"NativeReferenceName\":\"state_name\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{}}]}}}",
+          "filters": "[]",
+          "height": 150.06,
+          "width": 300.13,
+          "x": 0.00,
+          "y": 441.97,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"9793bc121b7d1a71eda3\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":271.3501712651033,\"z\":9000,\"width\":274.4336959385704,\"height\":150.06486744206472,\"tabOrder\":9000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"dim_date.year\",\"active\":true},{\"queryRef\":\"dim_date.month\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_date\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"year\"},\"Name\":\"dim_date.year\",\"NativeReferenceName\":\"year\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"month\"},\"Name\":\"dim_date.month\",\"NativeReferenceName\":\"month\"}]},\"expansionStates\":[{\"roles\":[\"Values\"],\"levels\":[{\"queryRefs\":[\"dim_date.year\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_date\"}},\"Property\":\"year\"}}],\"isPinned\":true},{\"queryRefs\":[\"dim_date.month\"],\"isCollapsed\":true,\"isPinned\":true}],\"root\":{\"identityValues\":null,\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"2025L\"}}],\"isToggled\":true}]}}],\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{}}]}}}",
+          "filters": "[]",
+          "height": 150.06,
+          "width": 274.43,
+          "x": 0.00,
+          "y": 271.35,
+          "z": 9000.00
+        },
+        {
+          "config": "{\"name\":\"9e979de0b7fd697f5b72\",\"layouts\":[{\"id\":0,\"position\":{\"x\":820.9940680793051,\"y\":74.85184701736067,\"z\":5000,\"width\":273.268647841158,\"height\":110.4955836922943,\"tabOrder\":5000}}],\"singleVisual\":{\"visualType\":\"kpi\",\"projections\":{\"TrendLine\":[{\"queryRef\":\"dim_date.date\"}],\"Goal\":[{\"queryRef\":\"fact_daily_air_quality.AQI target\"}],\"Indicator\":[{\"queryRef\":\"fact_daily_air_quality.MoM AQI Change %\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"fact_daily_air_quality\",\"Type\":0},{\"Name\":\"d\",\"Entity\":\"dim_date\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"date\"},\"Name\":\"dim_date.date\",\"NativeReferenceName\":\"date\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"AQI target\"},\"Name\":\"fact_daily_air_quality.AQI target\",\"NativeReferenceName\":\"AQI target\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"MoM AQI Change %\"},\"Name\":\"fact_daily_air_quality.MoM AQI Change %\",\"NativeReferenceName\":\"MoM AQI Change %\"}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"lastDate\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"goals\":[{\"properties\":{\"showGoal\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[{\"name\":\"f209e864f21d319ebd3b\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_date\"}},\"Property\":\"date\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_date\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"date\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"datetime'2025-11-28T00:00:00'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{},\"isHiddenInViewMode\":false},{\"name\":\"0b139e41ae8faa3f260b\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_parameter\"}},\"Property\":\"parameter_name\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_parameter\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"parameter_name\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Ozone'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{\"general\":[{\"properties\":{}}]}}]",
+          "height": 110.50,
+          "width": 273.27,
+          "x": 820.99,
+          "y": 74.85,
+          "z": 5000.00
+        },
+        {
+          "config": "{\"name\":\"c1f6251e7c1eb12503fa\",\"layouts\":[{\"id\":0,\"position\":{\"x\":547.7254202381471,\"y\":76.03997157319178,\"z\":4000,\"width\":273.268647841158,\"height\":110.4955836922943,\"tabOrder\":4000}}],\"singleVisual\":{\"visualType\":\"kpi\",\"projections\":{\"TrendLine\":[{\"queryRef\":\"dim_date.date\"}],\"Goal\":[{\"queryRef\":\"fact_daily_air_quality.AQI target\"}],\"Indicator\":[{\"queryRef\":\"fact_daily_air_quality.MoM AQI Change %\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"fact_daily_air_quality\",\"Type\":0},{\"Name\":\"d\",\"Entity\":\"dim_date\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"date\"},\"Name\":\"dim_date.date\",\"NativeReferenceName\":\"date\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"AQI target\"},\"Name\":\"fact_daily_air_quality.AQI target\",\"NativeReferenceName\":\"AQI target\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"MoM AQI Change %\"},\"Name\":\"fact_daily_air_quality.MoM AQI Change %\",\"NativeReferenceName\":\"MoM AQI Change %\"}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"lastDate\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"goals\":[{\"properties\":{\"showGoal\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[{\"name\":\"f209e864f21d319ebd3b\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_date\"}},\"Property\":\"date\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_date\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"date\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"datetime'2025-11-28T00:00:00'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{},\"isHiddenInViewMode\":false},{\"name\":\"0b139e41ae8faa3f260b\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_parameter\"}},\"Property\":\"parameter_name\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_parameter\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"parameter_name\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'NO2'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{\"general\":[{\"properties\":{}}]}}]",
+          "height": 110.50,
+          "width": 273.27,
+          "x": 547.73,
+          "y": 76.04,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"c62463bd02ca73656223\",\"layouts\":[{\"id\":0,\"position\":{\"x\":274.4567723969891,\"y\":73.66372246152955,\"z\":3000,\"width\":273.268647841158,\"height\":110.4955836922943,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"kpi\",\"projections\":{\"TrendLine\":[{\"queryRef\":\"dim_date.date\"}],\"Goal\":[{\"queryRef\":\"fact_daily_air_quality.AQI target\"}],\"Indicator\":[{\"queryRef\":\"fact_daily_air_quality.MoM AQI Change %\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"fact_daily_air_quality\",\"Type\":0},{\"Name\":\"d\",\"Entity\":\"dim_date\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"date\"},\"Name\":\"dim_date.date\",\"NativeReferenceName\":\"date\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"AQI target\"},\"Name\":\"fact_daily_air_quality.AQI target\",\"NativeReferenceName\":\"AQI target\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"MoM AQI Change %\"},\"Name\":\"fact_daily_air_quality.MoM AQI Change %\",\"NativeReferenceName\":\"MoM AQI Change %\"}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"lastDate\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"goals\":[{\"properties\":{\"showGoal\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[{\"name\":\"f209e864f21d319ebd3b\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_date\"}},\"Property\":\"date\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_date\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"date\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"datetime'2025-11-28T00:00:00'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{},\"isHiddenInViewMode\":false},{\"name\":\"0b139e41ae8faa3f260b\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_parameter\"}},\"Property\":\"parameter_name\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_parameter\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"parameter_name\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'CO'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{\"general\":[{\"properties\":{}}]}}]",
+          "height": 110.50,
+          "width": 273.27,
+          "x": 274.46,
+          "y": 73.66,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"dd4a968fefee260bb557\",\"layouts\":[{\"id\":0,\"position\":{\"x\":274.4567723969891,\"y\":184.15930615382385,\"z\":6000,\"width\":273.268647841158,\"height\":110.4955836922943,\"tabOrder\":6000}}],\"singleVisual\":{\"visualType\":\"kpi\",\"projections\":{\"TrendLine\":[{\"queryRef\":\"dim_date.date\"}],\"Goal\":[{\"queryRef\":\"fact_daily_air_quality.AQI target\"}],\"Indicator\":[{\"queryRef\":\"fact_daily_air_quality.MoM AQI Change %\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"fact_daily_air_quality\",\"Type\":0},{\"Name\":\"d\",\"Entity\":\"dim_date\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"date\"},\"Name\":\"dim_date.date\",\"NativeReferenceName\":\"date\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"AQI target\"},\"Name\":\"fact_daily_air_quality.AQI target\",\"NativeReferenceName\":\"AQI target\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"MoM AQI Change %\"},\"Name\":\"fact_daily_air_quality.MoM AQI Change %\",\"NativeReferenceName\":\"MoM AQI Change %\"}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"lastDate\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"goals\":[{\"properties\":{\"showGoal\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[{\"name\":\"f209e864f21d319ebd3b\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_date\"}},\"Property\":\"date\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_date\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"date\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"datetime'2025-11-28T00:00:00'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{},\"isHiddenInViewMode\":false},{\"name\":\"0b139e41ae8faa3f260b\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_parameter\"}},\"Property\":\"parameter_name\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_parameter\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"parameter_name\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'PM10'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{\"general\":[{\"properties\":{}}]}}]",
+          "height": 110.50,
+          "width": 273.27,
+          "x": 274.46,
+          "y": 184.16,
+          "z": 6000.00
+        },
+        {
+          "config": "{\"name\":\"de62b762a2b45dd8ff4b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":592.0367373056799,\"z\":2000,\"width\":290.87916086372815,\"height\":127.45235316997277,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"dim_location.county_name\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_location\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"county_name\"},\"Name\":\"dim_location.county_name\",\"NativeReferenceName\":\"county_name\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{}}]}}}",
+          "filters": "[]",
+          "height": 127.45,
+          "width": 290.88,
+          "x": 0.00,
+          "y": 592.04,
+          "z": 2000.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Map",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "4254fceaa309d3508680",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"1ebfc9528be5bc44a668\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"width\":100,\"height\":40,\"z\":1000,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'back'\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'Back'\"}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 40.00,
+          "width": 100.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"2a60aee2dec1d8d4d631\",\"layouts\":[{\"id\":0,\"position\":{\"x\":373.4250191320165,\"y\":235.3213624213924,\"z\":0,\"width\":883.1365415968858,\"height\":471.55130153167045,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"azureMap\",\"projections\":{\"Category\":[{\"queryRef\":\"dim_location.state_name\",\"active\":true}],\"Series\":[{\"queryRef\":\"fact_daily_air_quality.aqi_category\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_location\",\"Type\":0},{\"Name\":\"f\",\"Entity\":\"fact_daily_air_quality\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"state_name\"},\"Name\":\"dim_location.state_name\",\"NativeReferenceName\":\"state_name\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"aqi_category\"},\"Name\":\"fact_daily_air_quality.aqi_category\",\"NativeReferenceName\":\"AQI Category\"}]},\"columnProperties\":{\"fact_daily_air_quality.aqi_category\":{\"displayName\":\"AQI Category\"}},\"display\":{\"mode\":\"hidden\"},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"mapControls\":[{\"properties\":{\"defaultStyle\":{\"expr\":{\"Literal\":{\"Value\":\"'satellite_road_labels'\"}}},\"showStylePicker\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"showNavigationControls\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"showSelectionControl\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"centerLatitude\":{\"expr\":{\"Literal\":{\"Value\":\"37.77937667038347D\"}}},\"centerLongitude\":{\"expr\":{\"Literal\":{\"Value\":\"-98.30184500000001D\"}}},\"showRoadDetails\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"showBuildingFootprints\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"zoom\":{\"expr\":{\"Literal\":{\"Value\":\"3.08D\"}}},\"showAdminDistrict2Borders\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"showLabels\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"showAdminDistrictBorders\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"worldWrap\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"categoryLabels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"bubbleLayer\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"filledMap\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"mapTransparency\":{\"expr\":{\"Literal\":{\"Value\":\"40L\"}}}}}],\"heatMapLayer\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"heatMapColorLow\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":8,\"Percent\":0.6}}}}},\"heatMapColorCenter\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":9,\"Percent\":0.6}}}}},\"heatMapColorHigh\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":9,\"Percent\":0}}}}},\"maxZoom\":{\"expr\":{\"Literal\":{\"Value\":\"22L\"}}}}}],\"referenceLayer\":[{\"properties\":{}}],\"dataPoint\":[{\"properties\":{\"fill\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":2,\"Percent\":0.2}}}}}}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":-0.2}}}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"''\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 471.55,
+          "width": 883.14,
+          "x": 373.43,
+          "y": 235.32,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"2be75420173665102a4b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":373.4250191320165,\"y\":56.33175471091246,\"z\":4000,\"width\":287.1102336878764,\"height\":178.98960771047993,\"tabOrder\":4000}}],\"singleVisual\":{\"visualType\":\"kpi\",\"projections\":{\"Indicator\":[{\"queryRef\":\"Avg(fact_daily_air_quality.aqi)\"}],\"TrendLine\":[{\"queryRef\":\"dim_date.year\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"fact_daily_air_quality\",\"Type\":0},{\"Name\":\"d\",\"Entity\":\"dim_date\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"aqi\"}},\"Function\":1},\"Name\":\"Avg(fact_daily_air_quality.aqi)\",\"NativeReferenceName\":\"Average of aqi\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"year\"},\"Name\":\"dim_date.year\",\"NativeReferenceName\":\"Count of year\"}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 178.99,
+          "width": 287.11,
+          "x": 373.43,
+          "y": 56.33,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"566fd7ceec10036ac43f\",\"layouts\":[{\"id\":0,\"position\":{\"x\":969.4513270410258,\"y\":56.33175471091246,\"z\":6000,\"width\":287.1102336878764,\"height\":178.98960771047993,\"tabOrder\":6000}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"fact_daily_air_quality.Leading Pollutant by Avg AQI\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"fact_daily_air_quality\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Leading Pollutant by Avg AQI\"},\"Name\":\"fact_daily_air_quality.Leading Pollutant by Avg AQI\",\"NativeReferenceName\":\" \"}]},\"columnProperties\":{\"fact_daily_air_quality.Leading Pollutant by Avg AQI\":{\"displayName\":\" \"}},\"drillFilterOtherVisuals\":true,\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Leading Pollutant by Avg AQI'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 178.99,
+          "width": 287.11,
+          "x": 969.45,
+          "y": 56.33,
+          "z": 6000.00
+        },
+        {
+          "config": "{\"name\":\"8fb5435e6661dc0d04a3\",\"layouts\":[{\"id\":0,\"position\":{\"x\":660.5352528198929,\"y\":56.33175471091246,\"z\":5000,\"width\":308.9160742211329,\"height\":178.98960771047993,\"tabOrder\":5000}}],\"singleVisual\":{\"visualType\":\"cardVisual\",\"projections\":{\"Data\":[{\"queryRef\":\"fact_daily_air_quality.Worst State for Unhealthy AQI\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"fact_daily_air_quality\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Worst State for Unhealthy AQI\"},\"Name\":\"fact_daily_air_quality.Worst State for Unhealthy AQI\",\"NativeReferenceName\":\" \"}]},\"columnProperties\":{\"fact_daily_air_quality.Worst State for Unhealthy AQI\":{\"displayName\":\" \"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"referenceLabelLayout\":[{\"properties\":{\"position\":{\"expr\":{\"Literal\":{\"Value\":\"'right'\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'State with highest count of ''Unhealthy'' AQI'\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 178.99,
+          "width": 308.92,
+          "x": 660.54,
+          "y": 56.33,
+          "z": 5000.00
+        },
+        {
+          "config": "{\"name\":\"e1d271a59210dfcdba85\",\"layouts\":[{\"id\":0,\"position\":{\"x\":394.8099074903014,\"y\":234.6857654431513,\"z\":7000,\"width\":839.7350044762758,\"height\":453.48134885108925,\"tabOrder\":7000}}],\"singleVisual\":{\"visualType\":\"lineClusteredColumnComboChart\",\"projections\":{\"Category\":[{\"queryRef\":\"dim_date.year\",\"active\":true}],\"Y2\":[{\"queryRef\":\"fact_daily_air_quality.YOY AQI Change %\"}],\"Y\":[{\"queryRef\":\"fact_daily_air_quality.Avg AQI\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_date\",\"Type\":0},{\"Name\":\"f\",\"Entity\":\"fact_daily_air_quality\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"year\"},\"Name\":\"dim_date.year\",\"NativeReferenceName\":\"Count of year\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"YOY AQI Change %\"},\"Name\":\"fact_daily_air_quality.YOY AQI Change %\",\"NativeReferenceName\":\"YOY AQI Change %\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Avg AQI\"},\"Name\":\"fact_daily_air_quality.Avg AQI\",\"NativeReferenceName\":\"Avg AQI\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Avg AQI\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"valueAxis\":[{\"properties\":{\"secShow\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"alignZeros\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"logAxisScale\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"invertAxis\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"categoryAxis\":[{\"properties\":{\"axisType\":{\"expr\":{\"Literal\":{\"Value\":\"'Scalar'\"}}},\"invertAxis\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"dataPoint\":[{\"properties\":{\"fill\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":8,\"Percent\":0.6}}}}}}},{\"properties\":{\"fill\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":9,\"Percent\":0}}}}}},\"selector\":{\"metadata\":\"fact_daily_air_quality.YOY AQI Change %\"}}],\"lineStyles\":[{\"properties\":{\"lineStyle\":{\"expr\":{\"Literal\":{\"Value\":\"'dashed'\"}}},\"strokeLineJoin\":{\"expr\":{\"Literal\":{\"Value\":\"'bevel'\"}}},\"showMarker\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"labels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"labelPosition\":{\"expr\":{\"Literal\":{\"Value\":\"'Auto'\"}}},\"labelOrientation\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}},\"enableDetailDataLabel\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"enableValueDataLabel\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"backgroundColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}},\"labelContentLayout\":{\"expr\":{\"Literal\":{\"Value\":\"'SingleLine'\"}}}}}],\"seriesLabels\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 453.48,
+          "width": 839.73,
+          "x": 394.81,
+          "y": 234.69,
+          "z": 7000.00
+        },
+        {
+          "config": "{\"name\":\"e7608b70b068c434f03e\",\"layouts\":[{\"id\":0,\"position\":{\"x\":26.978922716627636,\"y\":218.82903981264639,\"z\":3000,\"width\":116.90866510538642,\"height\":196.84621389539424,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"listSlicer\",\"projections\":{\"Values\":[{\"queryRef\":\"dim_date.year\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_date\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"year\"},\"Name\":\"dim_date.year\",\"NativeReferenceName\":\"Year\"}]},\"columnProperties\":{\"dim_date.year\":{\"displayName\":\"Year\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{}}],\"general\":[{\"properties\":{}}]},\"vcObjects\":{\"padding\":[{\"properties\":{\"bottom\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[{\"name\":\"af95471d776abd975c43\",\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_date\",\"Type\":0}],\"Where\":[{\"Condition\":{\"Not\":{\"Expression\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"year\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"null\"}}]]}}}}}]},\"type\":\"Exclude\",\"howCreated\":4}]",
+          "height": 196.85,
+          "width": 116.91,
+          "x": 26.98,
+          "y": 218.83,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"eb1ce0c3db267fbcbd5a\",\"layouts\":[{\"id\":0,\"position\":{\"x\":11.811496955513904,\"y\":422.48816033184346,\"z\":2000,\"width\":287.1102336878764,\"height\":284.3845036212194,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"advancedSlicerVisual\",\"projections\":{\"Values\":[{\"queryRef\":\"dim_parameter.parameter_name\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_parameter\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"parameter_name\"},\"Name\":\"dim_parameter.parameter_name\",\"NativeReferenceName\":\"parameter_name\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"actionState\":[{\"properties\":{\"IsButtonsAdvanced\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"general\":[{\"properties\":{}}],\"selection\":[{\"properties\":{\"strictSingleSelect\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"singleSelect\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"layout\":[{\"properties\":{\"orientation\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"style\":{\"expr\":{\"Literal\":{\"Value\":\"'Cards'\"}}},\"autoGrid\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"overFlow\":[{\"properties\":{\"overFlowDirection\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}],\"fillCustom\":[{\"properties\":{\"fillColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":-0.2}}}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Pollutant Type'\"}}}}}]}}}",
+          "filters": "[{\"name\":\"aeffcbb2ccc01fad38bd\",\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_parameter\",\"Type\":0}],\"Where\":[{\"Condition\":{\"Not\":{\"Expression\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"parameter_name\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"null\"}}]]}}}}}]},\"type\":\"Exclude\",\"howCreated\":4}]",
+          "height": 284.38,
+          "width": 287.11,
+          "x": 11.81,
+          "y": 422.49,
+          "z": 2000.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ]
+}

@@ -9,7 +9,14 @@
           "parameters": {
             "bdate": {
               "value": {
-                "value": "@pipeline().parameters.bdate",
+                "value": "@formatDateTime(addDays(utcNow(), -106), 'yyyyMMdd')",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "edate": {
+              "value": {
+                "value": "@formatDateTime(addDays(utcNow(), -100), 'yyyyMMdd')",
                 "type": "Expression"
               },
               "type": "string"
@@ -23,8 +30,156 @@
           "secureInput": false,
           "secureOutput": false
         },
-        "name": "Bronze",
+        "name": "Ingestion to Bronze",
         "dependsOn": []
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "a8acbc80-283f-908f-48dd-5e2246ff6c0f",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Bronze to Silver",
+        "dependsOn": [
+          {
+            "activity": "Ingestion to Bronze",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "48ba30f6-8c8d-90f1-49a5-309c66c2e05a",
+          "workspaceId": "00000000-0000-0000-0000-000000000000"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Silver to Gold",
+        "dependsOn": [
+          {
+            "activity": "Bronze to Silver",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ForEach",
+        "typeProperties": {
+          "isSequential": true,
+          "items": {
+            "value": "@json('[\"auto_fact_daily_air_quality\",\"auto_dim_date\",\"auto_dim_location\",\"auto_dim_parameter\",\"auto_dim_method\"]')",
+            "type": "Expression"
+          },
+          "activities": [
+            {
+              "type": "Copy",
+              "typeProperties": {
+                "source": {
+                  "type": "LakehouseTableSource",
+                  "datasetSettings": {
+                    "type": "LakehouseTable",
+                    "typeProperties": {
+                      "schema": "dbo",
+                      "table": {
+                        "value": "@item()",
+                        "type": "Expression"
+                      }
+                    },
+                    "schema": [],
+                    "linkedService": {
+                      "name": "team2_LH",
+                      "properties": {
+                        "type": "Lakehouse",
+                        "typeProperties": {
+                          "artifactId": "87cfd2a4-9431-9d67-486b-fecc87c0302d",
+                          "workspaceId": "00000000-0000-0000-0000-000000000000",
+                          "rootFolder": "Tables"
+                        },
+                        "annotations": []
+                      }
+                    },
+                    "annotations": []
+                  }
+                },
+                "sink": {
+                  "type": "DataWarehouseSink",
+                  "tableOption": "autoCreate",
+                  "preCopyScript": "IF OBJECT_ID('dbo.' + '@{item()}', 'U') IS NOT NULL TRUNCATE TABLE dbo.@{item()}\n",
+                  "allowCopyCommand": true,
+                  "copyCommandSettings": {},
+                  "disableMetricsCollection": false,
+                  "datasetSettings": {
+                    "type": "DataWarehouseTable",
+                    "typeProperties": {
+                      "schema": "dbo",
+                      "table": {
+                        "value": "@item()",
+                        "type": "Expression"
+                      }
+                    },
+                    "schema": [],
+                    "linkedService": {
+                      "name": "team2_WH",
+                      "properties": {
+                        "type": "DataWarehouse",
+                        "typeProperties": {
+                          "artifactId": "8abb56af-3e98-4d1f-af3b-d5629ab273fb",
+                          "endpoint": "ljtep6k45cvuhamyfogizpvwim-i2fg2jh3ksiurnwgud4wu2qsn4.datawarehouse.fabric.microsoft.com",
+                          "workspaceId": "246d8a46-54fb-4891-b6c6-a0f96a6a126f"
+                        },
+                        "annotations": []
+                      }
+                    },
+                    "annotations": []
+                  }
+                },
+                "translator": {
+                  "type": "TabularTranslator",
+                  "typeConversion": true,
+                  "typeConversionSettings": {
+                    "allowDataTruncation": true,
+                    "treatBooleanAsNumber": false
+                  }
+                },
+                "enableStaging": true
+              },
+              "policy": {
+                "timeout": "0.12:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30,
+                "secureInput": false,
+                "secureOutput": false
+              },
+              "name": "Copy Tables",
+              "dependsOn": []
+            }
+          ]
+        },
+        "name": "Copy to Warehouse",
+        "dependsOn": [
+          {
+            "activity": "Silver to Gold",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
       }
     ],
     "parameters": {

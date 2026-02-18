@@ -1,0 +1,47 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "Dummy Data Upload",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "DefaultDestination": {
+      "queryId": "c321c874-e155-4b43-bc14-4be9a488b286",
+      "queryName": "DefaultDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "dim_date": {
+      "queryId": "4e5850ad-1518-447c-9ee2-fa723e4947ac",
+      "queryName": "dim_date"
+    },
+    "dim_location": {
+      "queryId": "42894ead-0201-4149-a902-30bfcb82dbec",
+      "queryName": "dim_location"
+    },
+    "dim_method": {
+      "queryId": "1bf0710c-860d-44cb-907c-8077d3185a5b",
+      "queryName": "dim_method"
+    },
+    "dim_parameter": {
+      "queryId": "533fae7a-01a6-4dba-b1e3-f3960046c080",
+      "queryName": "dim_parameter"
+    },
+    "fact_daily_air_quality": {
+      "queryId": "729f98d7-94d7-4cbe-b00f-c65567ac8aa8",
+      "queryName": "fact_daily_air_quality"
+    }
+  },
+  "connections": [
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"3b44e3fd-fd01-4fb9-8bbd-2e7c08f92753\",\"DatasourceId\":\"4c100983-dc52-4d92-b7ee-78709a729ef5\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"3b44e3fd-fd01-4fb9-8bbd-2e7c08f92753\",\"DatasourceId\":\"83e17f03-24fe-46a4-9b9c-1ea712a4c9ad\"}"
+    }
+  ]
+}

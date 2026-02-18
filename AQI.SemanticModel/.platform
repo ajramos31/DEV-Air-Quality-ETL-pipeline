@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "AQI"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "1c4d472f-b319-9272-4548-f266d653d222"
+  }
+}

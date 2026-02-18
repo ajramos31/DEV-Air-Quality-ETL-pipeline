@@ -193,13 +193,12 @@ silver_cbsa = (
 # CELL ********************
 
 # Saving to delta
-silver_measurement.write.format("delta").mode("overwrite").saveAsTable("auto_silver_measurement")
-silver_site.write.format("delta").mode("overwrite").saveAsTable("auto_silver_site")
-silver_measurement.write.format("delta").mode("overwrite").saveAsTable("auto_silver_daily_measurement")
-silver_admin_area.write.format("delta").mode("overwrite").saveAsTable("auto_silver_admin_area")
-silver_parameter.write.format("delta").mode("overwrite").saveAsTable("auto_silver_parameter")
-silver_method.write.format("delta").mode("overwrite").saveAsTable("auto_silver_method")
-silver_cbsa.write.format("delta").mode("overwrite").saveAsTable("auto_silver_cbsa")
+silver_site.write.format("delta").mode("overwrite").option("overwriteSchema", "true").saveAsTable("auto_silver_site")
+silver_measurement.write.format("delta").mode("overwrite").option("overwriteSchema", "true").saveAsTable("auto_silver_daily_measurement")
+silver_admin_area.write.format("delta").mode("overwrite").option("overwriteSchema", "true").saveAsTable("auto_silver_admin_area")
+silver_parameter.write.format("delta").mode("overwrite").option("overwriteSchema", "true").saveAsTable("auto_silver_parameter")
+silver_method.write.format("delta").mode("overwrite").option("overwriteSchema", "true").saveAsTable("auto_silver_method")
+silver_cbsa.write.format("delta").mode("overwrite").option("overwriteSchema", "true").saveAsTable("auto_silver_cbsa")
 
 # WHEN ACTUALLY IN PRODUCTION, SWITCH TO IF_END and DELTA MERGE
 

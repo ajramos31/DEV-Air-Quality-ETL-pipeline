@@ -24,7 +24,7 @@
 # META   }
 # META }
 
-# CELL ********************
+# PARAMETERS CELL ********************
 
 # Imports and array definitons 
 
@@ -36,10 +36,12 @@ from pyspark.sql import functions as F
 # Config
 API_EMAIL = "alfred.ramos3519@outlook.com"
 API_KEY = "bayhawk89"
-bdate = "20251101"
-edate = "20251129"
+bdate = "20260101"
+edate = "20260101"
+print("bdate:", bdate)
+print("edate:", edate)
 BASE_URL = "https://aqs.epa.gov/data/api/dailyData/byState"
-OUTPUT_PATH = "Files/TEST"
+OUTPUT_PATH = "Files/BRONZE"
 
 state_array = [ "01", "02", "04", "05", "06", "08", "09", "10", "11", "12", 
                 "13", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", 
@@ -207,9 +209,9 @@ for param in param_array:
             
             df = df.withColumn("date_local", F.to_date("date_local"))
             df = (df.withColumn("year", F.year("date_local")).withColumn("month", F.month("date_local")))
-            df.repartition('state').write.format('parquet').mode('append').partitionBy('year','month','state').save(OUTPUT_PATH)
+            df.repartition('state').write.format('parquet').mode('overwrite').option("partitionOverwriteMode", "dynamic") \
+            .partitionBy('year','month','state').save(OUTPUT_PATH)
             
-
             print(f"{call_count}/{total_calls}; On State {state}: {len(data['Data'])} rows written.") # Logging
             total_rows += len(data['Data'])
 
